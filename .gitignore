@@ -2,10 +2,5 @@ node_modules
 dist
 .env
 
-mongo
-//lleandrosilva Dj@315610
 
 
-mongodb://atlas-sql-675209322be68579e44f9d1b-p9xaj.a.query.mongodb.net/sample_mflix?ssl=true&authSource=admin
-
-mongodb+srv://lleandrosilva:<db_password>@cluster0.p9xaj.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0
