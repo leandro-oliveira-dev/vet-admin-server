@@ -2,6 +2,8 @@ import express from 'express';
 import cors from 'cors';
 import dotenv from 'dotenv';
 import userRoutes from './routes/userRoutes';
+import clientRoutes from './routes/clienteRoutes'
+import petRoutes from './routes/petRoutes'
 
 dotenv.config();
 
@@ -19,6 +21,8 @@ app.get('/', (req, res) => {
 });
 
 app.use(userRoutes);
+app.use('/clients', clientRoutes); // Rota para os clientes
+app.use('/pets', petRoutes); // Rota para os pets
 
 app.listen(Port, () => {
   // eslint-disable-next-line no-console
