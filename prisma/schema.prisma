@@ -24,22 +24,45 @@ model User {
 }
 
 model Client {
-  id          Int      @id @default(autoincrement())
-  name        String
-  phoneNumber String?
-  address     String?
-  pets        Pet[] // Um cliente pode ter vários pets
-  creatdAt    DateTime @default(now())
-  updatedAt   DateTime @default(now())
+  id           Int           @id @default(autoincrement())
+  name         String
+  phoneNumber  String?
+  address      String?
+  pets         Pet[] // Um cliente pode ter vários pets
+  appointments Appointment[] // Relacionamento com agendamentos
+  creatdAt     DateTime      @default(now())
+  updatedAt    DateTime      @default(now())
 }
 
 model Pet {
-  id        Int      @id @default(autoincrement())
-  name      String
-  breed     String
-  age       Int
-  clientId  Int // Relacionamento com Client (um pet pertence a um cliente)
-  client    Client   @relation(fields: [clientId], references: [id])
-  creatdAt  DateTime @default(now())
-  updatedAt DateTime @default(now())
+  id           Int           @id @default(autoincrement())
+  name         String
+  breed        String
+  age          Int
+  clientId     Int // Relacionamento com Client (um pet pertence a um cliente)
+  client       Client        @relation(fields: [clientId], references: [id])
+  appointments Appointment[] // Relacionamento com agendamentos
+  creatdAt     DateTime      @default(now())
+  updatedAt    DateTime      @default(now())
+}
+
+model Veterinarian {
+  id             Int           @id @default(autoincrement())
+  name           String
+  specialization String?
+  phoneNumber    String?
+  createdAt      DateTime      @default(now())
+  updatedAt      DateTime      @updatedAt
+  Appointments   Appointment[]
+}
+
+model Appointment {
+  id             Int          @id @default(autoincrement())
+  date           DateTime
+  clientId       Int
+  petId          Int
+  veterinarianId Int
+  client         Client       @relation(fields: [clientId], references: [id])
+  pet            Pet          @relation(fields: [petId], references: [id])
+  veterinarian   Veterinarian @relation(fields: [veterinarianId], references: [id])
 }
