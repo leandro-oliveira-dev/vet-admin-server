@@ -1,10 +1,7 @@
 import { Request, Response } from 'express'
-import { PrismaClient } from '@prisma/client'
-
-const prisma = new PrismaClient();
-
-class UserController {
-    async createUser(request: Request, response: Response) {
+import { prisma } from '../config/database';
+export class UserController {
+    static async createUser(request: Request, response: Response) {
         try {
             const { name, email, phoneNumber, address } = request.body;
 
@@ -23,7 +20,7 @@ class UserController {
         }
     }
 
-    async getAllUsers(request: Request, response: Response) {
+    static async getAllUsers(request: Request, response: Response) {
         try {
             const users = await prisma.user.findMany();
 
@@ -33,7 +30,7 @@ class UserController {
         }
     }
 
-    async updateUser(request: Request, response: Response) {
+    static async updateUser(request: Request, response: Response) {
         try {
             const { id } = request.params;
             const { name, email, phoneNumber, address } = request.body;
@@ -50,7 +47,7 @@ class UserController {
         }
     }
 
-    async deleteUser(request: Request, response: Response) {
+    static async deleteUser(request: Request, response: Response) {
         try {
             const { id } = request.params; // Pegar o ID da URL
 
@@ -64,5 +61,3 @@ class UserController {
         }
     }
 }
-
-export default new UserController();

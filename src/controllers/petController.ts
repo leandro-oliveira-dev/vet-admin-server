@@ -1,11 +1,8 @@
 import { Request, Response } from 'express';
-import { PrismaClient } from '@prisma/client';
+import { prisma } from '../config/database';
+export class PetController {
 
-const prisma = new PrismaClient();
-
-class PetController {
-
-    async createPet(request: Request, response: Response) {
+    static async createPet(request: Request, response: Response) {
         try {
             const { name, breed, age, clientId } = request.body; // Dados do pet
 
@@ -20,7 +17,7 @@ class PetController {
     }
 
 
-    async getAllPets(request: Request, response: Response) {
+    static async getAllPets(request: Request, response: Response) {
         try {
             const pets = await prisma.pet.findMany({
                 include: {
@@ -35,7 +32,7 @@ class PetController {
     }
 
 
-    async updatePet(request: Request, response: Response) {
+    static async updatePet(request: Request, response: Response) {
         try {
             const { id } = request.params;
             const { name, breed, age, clientId } = request.body;
@@ -52,7 +49,7 @@ class PetController {
     }
 
 
-    async deletePet(request: Request, response: Response) {
+    static async deletePet(request: Request, response: Response) {
         try {
             const { id } = request.params;
 
@@ -67,4 +64,3 @@ class PetController {
     }
 }
 
-export default new PetController();

@@ -1,10 +1,8 @@
 import { Request, Response } from 'express'
-import { Prisma, PrismaClient } from '@prisma/client'
+import { prisma } from '../config/database';
 
-const prisma = new PrismaClient();
-
-class ClientController {
-    async createClient(request: Request, response: Response) {
+export class ClientController {
+    static async createClient(request: Request, response: Response) {
         try {
             const { name, phoneNumber, address } = request.body;
 
@@ -23,7 +21,7 @@ class ClientController {
         }
     }
 
-    async getAllClients(request: Request, response: Response) {
+    static async getAllClients(request: Request, response: Response) {
         try {
 
             const clients = await prisma.client.findMany({
@@ -37,7 +35,7 @@ class ClientController {
         }
     }
 
-    async updateCliente(request: Request, response: Response) {
+    static async updateCliente(request: Request, response: Response) {
         try {
 
             const { id } = request.params;
@@ -55,7 +53,7 @@ class ClientController {
         }
     }
 
-    async deleteClient(request: Request, response: Response) {
+    static async deleteClient(request: Request, response: Response) {
         try {
             const { id } = request.params;
 
@@ -69,5 +67,3 @@ class ClientController {
         }
     }
 }
-
-export default new ClientController();
