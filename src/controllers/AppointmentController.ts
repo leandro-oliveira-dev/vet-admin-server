@@ -21,6 +21,7 @@ class AppointmentController {
         const { date, clientId, petId, veterinarianId } = request.body
 
         try {
+
             const appointmentDate = new Date(date);
 
             const hour = appointmentDate.getHours();

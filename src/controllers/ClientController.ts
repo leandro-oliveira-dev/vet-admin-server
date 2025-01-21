@@ -4,12 +4,13 @@ import { prisma } from '../config/database';
 export class ClientController {
     static async createClient(request: Request, response: Response) {
         try {
-            const { name, phoneNumber, address } = request.body;
+            const { name, email, phoneNumber, address } = request.body;
 
 
             const newClient = await prisma.client.create({
                 data: {
                     name,
+                    email,
                     phoneNumber,
                     address
                 }
@@ -39,11 +40,11 @@ export class ClientController {
         try {
 
             const { id } = request.params;
-            const { name, phoneNumber, address } = request.body;
+            const { name, email, phoneNumber, address } = request.body;
 
             const updateClient = await prisma.client.update({
                 where: { id: parseInt(id) },
-                data: { name, phoneNumber, address },
+                data: { name, email, phoneNumber, address },
             })
 
             response.status(200).json({ message: "Cliente atualizado com sucesso!", updateClient })

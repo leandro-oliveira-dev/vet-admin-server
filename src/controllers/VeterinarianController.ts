@@ -5,11 +5,12 @@ import { prisma } from "../config/database";
 export class VeterinarianController {
     static async createVeterinarian(request: Request, response: Response) {
         try {
-            const { name, specialization, phoneNumber } = request.body;
+            const { name, email, specialization, phoneNumber } = request.body;
 
             const newVeterinarian = await prisma.veterinarian.create({
                 data: {
                     name,
+                    email,
                     specialization,
                     phoneNumber,
                 }
@@ -58,12 +59,13 @@ export class VeterinarianController {
     static async updateVeterinarian(request: Request, response: Response): Promise<void> {
         try {
             const { id } = request.params;
-            const { name, specialization, phoneNumber } = request.body;
+            const { name, email, specialization, phoneNumber } = request.body;
 
             const updatedVeterinarian = await prisma.veterinarian.update({
                 where: { id: Number(id) },
                 data: {
                     name,
+                    email,
                     specialization,
                     phoneNumber,
                 },

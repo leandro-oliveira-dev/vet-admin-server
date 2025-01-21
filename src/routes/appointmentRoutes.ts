@@ -10,12 +10,12 @@ router.get('/appointments/getall', AppointmentController.getAllAppointments);
 router.post('/appointments/create', AppointmentController.createAppointment);
 
 // Rota para buscar um agendamento por ID
-router.get('/appointments/:id', AppointmentController.getAppointmentById);
+router.get('/appointments/get/:id', AppointmentController.getAppointmentById);
 
 // Rota para atualizar um agendamento
-router.put('/appointments/:id', AppointmentController.updateAppointment);
+router.put('/appointments/update/:id', AppointmentController.updateAppointment);
 
 // Rota para deletar um agendamento
-router.delete('/appointments/:id', AppointmentController.deleteAppointment);
+router.delete('/appointments/delete/:id', AppointmentController.deleteAppointment);
 
 export default router;

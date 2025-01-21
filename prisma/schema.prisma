@@ -25,6 +25,7 @@ model User {
 
 model Client {
   id           Int           @id @default(autoincrement())
+  email        String        @unique
   name         String
   phoneNumber  String?
   address      String?
@@ -47,13 +48,15 @@ model Pet {
 }
 
 model Veterinarian {
-  id             Int           @id @default(autoincrement())
+  id             Int            @id @default(autoincrement())
+  email          String         @unique
   name           String
   specialization String?
   phoneNumber    String?
-  createdAt      DateTime      @default(now())
-  updatedAt      DateTime      @updatedAt
+  createdAt      DateTime       @default(now())
+  updatedAt      DateTime       @updatedAt
   Appointments   Appointment[]
+  availabilities Availability[] // Relacionamento com disponibilidades
 }
 
 model Appointment {
@@ -65,4 +68,15 @@ model Appointment {
   client         Client       @relation(fields: [clientId], references: [id])
   pet            Pet          @relation(fields: [petId], references: [id])
   veterinarian   Veterinarian @relation(fields: [veterinarianId], references: [id])
+}
+
+model Availability {
+  id             Int          @id @default(autoincrement())
+  dayOfWeek      String // Ex.: "Monday"
+  startTime      String // Ex.: "08:00"
+  endTime        String // Ex.: "17:00"
+  veterinarianId Int
+  veterinarian   Veterinarian @relation(fields: [veterinarianId], references: [id])
+  createdAt      DateTime     @default(now())
+  updatedAt      DateTime     @updatedAt
 }
