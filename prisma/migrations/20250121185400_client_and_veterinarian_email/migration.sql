@@ -8,10 +8,10 @@
 
 */
 -- AlterTable
-ALTER TABLE "Client" ADD COLUMN "email" TEXT DEFAULT 'default@email.com';
+ALTER TABLE "Client" ADD COLUMN "email" TEXT;
 
 -- AlterTable
-ALTER TABLE "Veterinarian" ADD COLUMN "email" TEXT DEFAULT 'default@email.com';
+ALTER TABLE "Veterinarian" ADD COLUMN "email" TEXT;
 
 -- CreateIndex
 CREATE UNIQUE INDEX "Client_email_key" ON "Client"("email");
