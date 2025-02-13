@@ -10,7 +10,12 @@ export class VeterinarianController {
             const newVeterinarian = await prisma.veterinarian.create({
                 data: {
                     name,
-                    email,
+                    auth: {
+                        create: {
+                            email,
+                            password: '123456'
+                        }
+                    },
                     specialization,
                     phoneNumber,
                 }
@@ -65,7 +70,11 @@ export class VeterinarianController {
                 where: { id: Number(id) },
                 data: {
                     name,
-                    email,
+                    auth: {
+                        update: {
+                            email,
+                        }
+                    },
                     specialization,
                     phoneNumber,
                 },

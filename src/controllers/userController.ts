@@ -7,7 +7,12 @@ export class UserController {
 
             const newUser = await prisma.user.create({
                 data: {
-                    email,
+                    auth: {
+                        create: {
+                            email,
+                            password: '123456'
+                        }
+                    },
                     name,
                     phoneNumber,
                     address,
@@ -22,7 +27,12 @@ export class UserController {
 
     static async getAllUsers(request: Request, response: Response) {
         try {
-            const users = await prisma.user.findMany();
+            const users = await prisma.user.findMany(
+                {
+                    include: { auth: true },
+
+                }
+            );
 
             response.status(200).json(users);
         } catch (error) {
@@ -37,7 +47,12 @@ export class UserController {
 
             const updatedUser = await prisma.user.update({
                 where: { id: parseInt(id) },
-                data: { name, email, phoneNumber, address },
+                data: {
+                    name,
+                    auth: {
+                        update: { email }
+                    }, phoneNumber, address
+                },
             })
 
             response.status(200).json({ message: "Usuário atualizado com sucesso", updatedUser })

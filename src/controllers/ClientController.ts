@@ -10,7 +10,12 @@ export class ClientController {
             const newClient = await prisma.client.create({
                 data: {
                     name,
-                    email,
+                    auth: {
+                        create: {
+                            email,
+                            password: '123456'
+                        }
+                    },
                     phoneNumber,
                     address
                 }
@@ -44,7 +49,13 @@ export class ClientController {
 
             const updateClient = await prisma.client.update({
                 where: { id: parseInt(id) },
-                data: { name, email, phoneNumber, address },
+                data: {
+                    name, auth: {
+                        update: {
+                            email,
+                        }
+                    }, phoneNumber, address
+                },
             })
 
             response.status(200).json({ message: "Cliente atualizado com sucesso!", updateClient })
