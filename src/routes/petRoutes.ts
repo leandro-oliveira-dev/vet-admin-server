@@ -3,9 +3,9 @@ import { PetController } from '../controllers/PetController';
 
 const router = Router();
 
-router.post('/create', PetController.createPet);
-router.get('/getall', PetController.getAllPets);
-router.put('/update/:id', PetController.updatePet);
-router.delete('/delete/:id', PetController.deletePet);
+router.post('/', PetController.createPet);
+router.get('/', PetController.getAllPets);
+router.put('/:id', PetController.updatePet);
+router.delete('/:id', PetController.deletePet);
 
 export default router;
